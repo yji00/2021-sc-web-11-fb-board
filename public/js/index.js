@@ -9,14 +9,29 @@ var user = null;
 
 
 /*************** 이벤트 등록 *****************/
-$('.bt-login-google').click(onLoginGoogle);
+$('.bt-login').click(onLoginGoogle);
 $('.bt-logout').click(onLogOut);
 auth.onAuthStateChanged(onchangeAuth); //상태 변할때 마다 실행
 
 /*************** 이벤트 콜백 *****************/
 function onchangeAuth(r){
 	user = r;
-	console.log(user);
+	if(user){
+		$('.header-wrapper .email').text(user.email);
+		$('.header-wrapper .photo img').attr('src',user.photoURL);
+		$('.header-wrapper .info-wrap').css('display','flex');
+		$('.bt-login').show();
+		$('.bt-login').hide();		$('.bt-logout').show();
+		console.log(user.ba.dis)
+	}
+	else{
+		$('.header-wrapper .email').text('');
+		$('.header-wrapper .photo img').attr('src','//via.placeholder.com/1x1/333');
+		$('.header-wrapper .info-wrap').css('display','none')
+		$('.bt-login').show();
+		$('.bt-logout').hide();
+		
+	}
 
 }
 
