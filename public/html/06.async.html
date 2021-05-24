@@ -1,0 +1,48 @@
+<script src="../js/jquery-3.5.1.min.js"></script>
+<script>
+  var appid = '0cf73b083cc8b56e77a676f5e5fba3f5'; 
+  var date = {
+    units: 'metric',
+    appid: appid
+  }
+
+  /// 위치 정보를 가져온다.
+  // 가져온 위치정보로 현재 날씨를
+  // callback version
+
+  navigator.geolocation.getCurrentPosition(function(r) {
+    var lat = r.coords.latitude;
+    var lon = r.coords.longitude;
+    $.get(dailyURL, data, function(r){
+      
+    })
+  })
+
+  getGeo()
+  .then(function(r) {
+    data.lat = r.lat;
+    data.lon = r.lon;
+    return $.get(dailyURL, data);
+  }).then(function(r) {
+    data.lat = r.coords.lat;
+    data.lon = r.coords.lon;
+    return $.get(weeklyURL,data)
+  })
+  .catch(function(err){
+
+  })
+
+  async function weather() {
+    try {
+      var geo =  await getGeo();
+      data.lat = geo.lat;
+      data.lon = geo.lon;
+      var daily = await $.get(dailyURL, get);
+    } catch (err) {
+      
+    }
+
+  }
+
+weather();
+</script>

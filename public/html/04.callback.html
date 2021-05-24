@@ -1,0 +1,51 @@
+<script>
+  /* function sum(a, b, fn) {
+    var c = a + b;
+    fn(c);
+  }
+  
+  sum(1, 2, function(r){
+    console.log(r * r);
+  }); */
+  
+  
+  /* setTimeout(function() {
+    console.log('콜백실행');
+    console.log('Hi~');
+    setTimeout(function(){
+      console.log('Hi2~');
+      setTimeout(function(){
+        console.log('Hi3~');
+      }, 0);
+    }, 0);
+  }, 0); */
+  
+  
+  /****************** Promise *******************/
+  
+  function print2(a) {
+    return new Promise(function(resolve, reject){
+      if(typeof a === 'number'){
+      var txt = a + "입니다.";
+      
+    }
+    else {
+      var err = '숫'
+    }
+  });
+}
+/****************** async/await *******************/
+async function init(){
+  var r;
+r = await sum2(1, 2);
+r = await sum2(r, 3);
+r = await sum2(r, 4);
+r = await sum2(r, 5);
+r = await sum2(r, 6);
+r = await sum2(r, 7);
+r = await sum2(r, 8);
+r = await sum2(r, 9);
+r = await sum2(r, 10);
+}
+
+  </script>

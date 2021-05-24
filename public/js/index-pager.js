@@ -5,16 +5,83 @@ var db = firebase.database(); //firebase의 database모듈을 불러온다.
 var ref = db.ref('root/board');
 var user = null;
 
-// paging
-var observer;
-var listCnt = 3;
-
+// Pagination
+var page = 1;
+var pagerCnt = 3;
+var listCnt = 5;
+var totalRecord = 0;
 
 var $tbody = $('.list-wrapper tbody');
 var $form = $('.create-form');
+var $pager = $('.pager-wrapper').find('.pagination');
 
 
 /*************** 사용자 함수 *****************/
+function genLists() {
+	ref.get().then(onGetData);
+	function onGetData(r) {
+		$tbody.empty();
+		totalRecord = r.numChildren();
+		var startIdx = (page - 1) * listCnt;
+		var endIdx = startIdx + listCnt > totalRecord ? totalRecord : startIdx + listCnt;
+		var temp = [];
+		r.forEach(function(v) { temp.unshift(v) });	// 순서 뒤바꿈
+		console.log(temp);
+		for(var i=startIdx; i<endIdx; i++) {
+			genHTML(temp[i].key, temp[i].val(), 'append');
+		}
+		var totalPage = Math.ceil(totalRecord / listCnt);
+		var startIdx = (page - 1) * listCnt;
+		var startPage = Math.floor((page - 1) / pagerCnt) * pagerCnt + 1;
+		var endPage = (startPage + pagerCnt - 1 > totalPage) ? totalPage : startPage + pagerCnt - 1;
+		var nextPage = (page + 1 > totalPage) ? totalPage : page + 1;
+		var prevPage = (page - 1 < 1) ? 1 : page - 1;
+		var nextPager = (endPage + 1 > totalPage) ? totalPage : endPage + 1;
+		var prevPager = (startPage - 1 < 1) ? 1 : startPage - 1;
+		console.log('page => ', page);
+		console.log('totalRecord => ', totalRecord);
+		console.log('startIdx => ', startIdx);
+		console.log('startPage => ', startPage);
+		console.log('endPage => ', endPage);
+		console.log('nextPage => ', nextPage);
+		console.log('prevPage => ', prevPage);
+		console.log('nextPager => ', nextPager);
+		console.log('prevPager => ', prevPager);
+
+		var html = '';
+		html += '<li class="page-item" data-page="1">';
+		html += '<span class="page-link bi-chevron-bar-left"></span>';
+		html += '</li>';
+		html += '<li class="page-item" data-page="'+prevPager+'">';
+		html += '<span class="page-link bi-chevron-double-left"></span>';
+		html += '</li>';
+		html += '<li class="page-item" data-page="'+prevPage+'">';
+		html += '<span class="page-link bi-chevron-left"></span>';
+		html += '</li>';
+		for(var i=startPage; i<=endPage; i++) {
+			html += '<li class="page-item '+(i == page ? 'active' : '')+'" data-page="'+i+'">';
+			html += '<span class="page-link">'+i+'</span>';
+			html += '</li>';
+		}
+		html += '<li class="page-item" data-page="'+nextPage+'">';
+		html += '<span class="page-link bi-chevron-right"></span>';
+		html += '</li>';
+		html += '<li class="page-item" data-page="'+nextPager+'">';
+		html += '<span class="page-link bi-chevron-double-right"></span>';
+		html += '</li>';
+		html += '<li class="page-item" data-page="'+totalPage+'">';
+		html += '<span class="page-link bi-chevron-bar-right"></span>';
+		html += '</li>';
+		$pager.html(html);
+		$pager.find('.page-item').click(onPagerClick);
+	}
+}
+
+function onPagerClick() {
+	page = $(this).data('page');
+	genLists();
+}
+
 function genHTML(k, v, method) {
 	var html = '';
 	html += '<tr class="id" id="'+k+'" data-uid="'+v.uid+'" data-sort="'+v.sort+'">';
@@ -32,7 +99,7 @@ function genHTML(k, v, method) {
 	html += '</tr>';
 	var $tr = (method && method == 'append') ? $(html).appendTo($tbody) : $(html).prependTo($tbody);
 
-	var num = $tbody.find('tr').length;
+	var num = totalRecord - (page-1) * listCnt;
 	$tbody.find('tr').each(function(i) {
 		$(this).find('td:first-child').text(num--);
 	});
@@ -45,39 +112,27 @@ function genHTML(k, v, method) {
 	return $tr;
 }
 
-
-observer = new IntersectionObserver(onIntersection, { root: null });
 $tbody.empty();
 
 
 /*************** 이벤트 등록 *****************/
 auth.onAuthStateChanged(onChangeAuth);
 // ref.limitToLast(listCnt).on('child_added', onAdded);
-ref.limitToLast(listCnt).once('value').then(onGetFirst).catch(onError);
 ref.on('child_removed', onRemoved);
 ref.on('child_changed', onChanged);
-
 
 $('.bt-login').click(onLoginGoogle);
 $('.bt-logout').click(onLogOut);
 $form.find('.bt-cancel').click(onReset);
 // $(window).resize(onResize);
 
+genLists();
+
 
 /*************** 이벤트 콜백 *****************/
-function onGetFirst(r) {
-	r.forEach(function(v) {
-		genHTML(v.key, v.val());
-		observer.observe($tbody.find('tr:last-child')[0]);
-	});
-}
-
-function onError(err) {
-	console.log(err);
-}
-
 function onRemoved(r) {
 	$('#'+r.key).remove();
+	genLists();
 }
 
 function onChanged(r) {
@@ -85,29 +140,6 @@ function onChanged(r) {
 	$('#'+r.key).find('.content > span').text(r.val().content);
 	$('#'+r.key).find('.readnum').text(r.val().readnum);
 	$('#'+r.key).find('.date').text(moment(r.val().updatedAt).format('YYYY-MM-DD'));
-}
-
-function onAdded(r) {
-	var k = r.key;
-	var v = r.val();
-	var $tr = genHTML(k, v);
-	observer.observe($tbody.find('tr:last-child')[0]);
-}
-
-function onIntersection(entries, observer) {
-	entries.forEach(function(v) {
-		console.log(v.isIntersecting);
-		if(v.isIntersecting) {
-			var key = $tbody.find('tr:last-child').data('sort');
-			ref.orderByChild('sort').startAfter(key).limitToFirst(listCnt).get().then(function(r) {
-				r.forEach(function(v) {
-					genHTML(v.key, v.val(), 'append');
-				});
-				observer.observe($tbody.find('tr:last-child')[0]);
-				observer.unobserve(v.target);
-			});
-		}
-	});
 }
 
 function onChgClick() {
@@ -185,8 +217,9 @@ function onSubmit(f) {
 			data.readnum = 0;
 			data.uid = user.uid;
 			data.sort = -data.createdAt;
-			var insertData = ref.push(data);
-			genHTML(insertData.key, data);
+			ref.push(data);
+			page = 1;
+			genLists();
 		}
 		else {
 			data.updatedAt = new Date().getTime();
@@ -209,22 +242,22 @@ function onSubmit(f) {
 function onChangeAuth(r) {
 	user = r;
 	if(user) {
+		$('.header-wrapper .email').text(user.email);
 		$('.header-wrapper .photo img').attr('src', user.photoURL);
 		$('.header-wrapper .info-wrap').css('display', 'flex');
-		$('.header-wrapper .logo i').css('display', 'none');
 		$('.create-wrapper').show();
 		$('.create-wrapper input[name="writer"]').val(user.displayName);
-		$('.bt-login').css('display', 'none');
-		$('.bt-logout').css('display', 'flex');
+		$('.bt-login').hide();
+		$('.bt-logout').show();
 	}
 	else {
+		$('.header-wrapper .email').text('');
 		$('.header-wrapper .photo img').attr('src', '//via.placeholder.com/1x1/333');
 		$('.header-wrapper .info-wrap').css('display', 'none');
-		$('.header-wrapper .logo i').css('display', 'inline-block');
 		$('.create-wrapper').hide();
 		$('.create-wrapper input[name="writer"]').val('');
-		$('.bt-login').css('display', 'flex');
-		$('.bt-logout').css('display', 'none');
+		$('.bt-login').show();
+		$('.bt-logout').hide();
 	}
 }
 

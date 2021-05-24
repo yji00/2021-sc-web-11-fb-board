@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/all.min.css">
+	<link rel="stylesheet" href="../css/bootstrap-icons.css">
+	<link rel="stylesheet" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" href="../css/base.css">
+	<link rel="stylesheet" href="../css/talk.css">
+	<script src="/__/firebase/8.6.1/firebase-app.js"></script>
+	<script src="/__/firebase/8.6.1/firebase-auth.js"></script>
+	<script src="/__/firebase/8.6.1/firebase-database.js"></script>
+	<script src="/__/firebase/8.6.1/firebase-storage.js"></script>
+	<script src="/__/firebase/8.6.1/firebase-analytics.js"></script>
+	<script src="/__/firebase/8.6.1/firebase-performance.js"></script>
+	<script src="/__/firebase/init.js?useEmulator=true"></script>
+	<script src="../js/jquery-3.5.1.min.js"></script>
+	<script src="../js/lodash.min.js"></script>
+	<script src="../js/uuidv4.min.js"></script>
+	<script src="../js/moment.min.js"></script>
+	<script src="../js/minified.js"></script>
+	<script src="../js/util.js"></script>
+</head>
+<body>
+	<div class="container-wrapper">
+		<header class="header-wrapper">
+			<h1 class="logo">
+				<i class="bi-journal-text"></i>
+				<li class="info-wrap">
+					<div class="photo">
+						<img src="//via.placeholder.com/1x1/333" alt="포토" class="w-100">
+					</div>
+				</li>
+			</h1>
+			<ul class="navi-wrap">
+				<li class="navi"><a href="./index.html">Infinite<br> Board</a></li>
+				<li class="navi"><a href="./index-pager.html">Pager<br> Board</a></li>
+				<li class="navi bt-login"><i class="fab fa-google"></i> </li>
+				<li class="navi bt-logout"><i class="fa fa-sign-out-alt"></i> </li>
+			</ul>
+		</header>
+		<section class="title-wrapper">
+			<h2 class="title">Firebase를 활용한 채팅앱</h2>
+			<h3 class="title">Firebase Auth/DataBase</h3>
+		</section>
+		<section class="login-wrapper">
+			<button class="btn btn-danger bt-login">
+				<i class="fab fa-google"></i> 로그인
+			</button>
+			<div>로그인 후 이용가능 합니다.</div>
+		</section>
+		<section class="room-wrapper">
+			<form class="room-wrap create" onsubmit="return onRoomSubmit(this);">
+				<h3 class="title">신규 방 개설</h3>
+				<div class="room-choice text-center">
+					<!-- <input type="radio" name="secret" id="openRadio" onchange="onSecretChanged(this);" value="open" checked>
+					<label class="mr-3" for="openRadio">공개방</label>
+					<input type="radio" name="secret" id="secretRadio" onchange="onSecretChanged(this);" value="secret">
+					<label for="secretRadio">비공개방</label> -->
+					<label>
+						<input type="checkbox" name="secret" onchange="onSecretChanged(this);" value="secret">
+						비밀방
+					</label>
+				</div>
+				<div class="name">
+					<input type="text" class="form-control" name="name" placeholder="방제목">
+				</div>
+				<div class="writer form-inline">
+					<input type="text" class="form-control" name="writer" placeholder="방장이름">
+					<input type="password" class="form-control" name="roompw" placeholder="비밀번호" style="display: none;">
+				</div>
+				<hr>
+				<div class="btn-wrap">
+					<button class="btn btn-sm btn-primary">
+						<i class="bt-update fa fa-save"></i> 저장
+					</button>
+				</div>
+			</form>
+		</section>
+		<section class="chat-wrapper">
+			<div class="bt-out-wrap wrapper">
+				<button class="btn btn-sm btn-danger bt-out" onclick="onRoomOut();">
+					<i class="fa fa-sign-out-alt"></i>
+					채팅방 나가기
+				</button>
+			</div>
+			<section class="list-wrapper wrapper"></section>
+			<section class="gap-wrapper"></section>
+			<section class="create-wrapper wrapper">
+				<form class="create-form form-inline" onsubmit="return onSubmit(this);">
+					<div class="icon">
+						<img src="//via.placeholder.com/1x1/fff" alt="icon" class="w-100">
+					</div>
+					<input type="text" name="content" class="form-control" placeholder="대화내용" autofocus>
+					<button class="bt-create btn btn-danger">전송</button>
+				</form>
+			</section>
+		</section>
+	</div>
+	<script src="../js/talk.js"></script>
+</body>
+</html>

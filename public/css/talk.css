@@ -1,0 +1,156 @@
+/********************** 글로벌 설정 *********************/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
+/* font-family: 'Noto Serif', serif; */
+@import 'nanum-barun.css';
+/* font-family: 'NanumBarunGothic', sans-serif */
+
+html, body {font-family: 'NanumBarunGothic', sans-serif;}
+.wrapper {max-width: 1168px; margin: 0 auto;}
+.container-wrapper {height: 100vh; display: flex; flex-direction: column; justify-content: stretch; align-items: center;}
+
+
+/********************** pagination custom *********************/
+.pagination {justify-content: center;}
+.page-item .page-link {padding: .5em .75em .35em .75em;}
+.page-item.active .page-link {background-color: #343a40; border-color: #454d55;}
+
+
+/********************** header-wrapper *********************/
+.header-wrapper {font-family: 'Noto Serif', serif; display: flex; align-items: center; background-color: #a0368e; color: #fff; width: 100%;}
+.header-wrapper br {display: none;}
+.header-wrapper .logo {font-size: 1.75em; padding-left: .5em; display: flex; align-items: center;}
+.header-wrapper .logo::after {content: 'FIREBASE TALK'; display: inline-block;}
+.header-wrapper .logo i {font-size: .875em; margin-right: .5em;}
+.header-wrapper .navi-wrap {margin-left: auto; display: flex; font-family: 'NanumBarunGothic', sans-serif;}
+.header-wrapper .navi-wrap .navi {cursor: pointer; flex-shrink: 1;}
+.header-wrapper .navi-wrap .navi:hover {background-color: crimson;}
+.header-wrapper .navi-wrap .navi a {display: inline-block; padding: 1.5em;}
+.header-wrapper .navi-wrap .navi.bt-login {align-items: center; padding: 1.5em;}
+.header-wrapper .navi-wrap .navi.bt-login i {margin-right: .25em;}
+.header-wrapper .navi-wrap .navi.bt-logout i {margin-right: .25em;}
+.header-wrapper .navi-wrap .navi.bt-logout {display: none; align-items: center; padding: 1.5em;}
+.header-wrapper .navi-wrap .bt-login::after {content: 'LOGIN'; display: inline-block;}
+.header-wrapper .navi-wrap .bt-logout::after {content: 'LOGOUT'; display: inline-block;}
+
+.header-wrapper .logo .info-wrap {display: flex; align-items: center; display: none; margin-right: .5em;}
+.header-wrapper .logo .info-wrap .photo {border-radius: 50%; overflow: hidden; width: 36px;}
+
+
+/********************** title-wrapper *********************/
+.title-wrapper {margin: 4em 0 3em 0; text-align: center; display: flex; align-items: center; flex-direction: column;}
+.title-wrapper h2.title {font-size: 1.75em; border-bottom: 2px solid #333; line-height: 1.3; margin-bottom: .5em;}
+.title-wrapper h3.title {font-size: 1.125em; color: #999;}
+
+
+/********************** chat-wrapper *********************/
+.chat-wrapper {display: none; flex-direction: column; align-items: center; width: 100%;  overflow: hidden; justify-content: stretch;}
+
+
+/********************** create-wrapper *********************/
+.chat-wrapper .bt-out-wrap {align-self: flex-end; margin-bottom: .5em;}
+.chat-wrapper .create-wrapper {padding: .5em 0; width: 96%;}
+.chat-wrapper .create-wrapper form {display: flex; align-items: center; flex-wrap: nowrap;}
+.chat-wrapper .create-wrapper .icon {border-radius: 50%; overflow: hidden; width: 36px; height: 36px; border: 1px solid #eee; flex-shrink: 0;} 
+.chat-wrapper .create-wrapper form > input[name='content'] {flex-grow: 1; margin: .5em; min-width: 30%;}
+.chat-wrapper .create-wrapper form .btn {padding: .375rem 1.5rem; flex-shrink: 0;}
+.chat-wrapper .create-wrapper form input {transition: all .5s;}
+.chat-wrapper .create-wrapper form.active input {border-color: #28a745; background-color: #fff7dc;}
+
+
+/********************** list-wrapper *********************/
+.chat-wrapper .list-wrapper {width: 96%; flex-grow: 1; border: 2px solid #333; background-color: #f5e9f3; border-radius: 8px; padding: .5em; overflow-y: auto; min-height: 300px;}
+.chat-wrapper .list-wrapper .line {display: flex; align-items: center; margin: 2em 0; color: #555;}
+.chat-wrapper .list-wrapper .line > span {padding: 0 .5em;}
+.chat-wrapper .list-wrapper .line::before {display: block; content: ''; height: 2px; background-color: #999; flex-grow: 1;}
+.chat-wrapper .list-wrapper .line::after {display: block; content: ''; height: 2px; background-color: #999; flex-grow: 1;}
+.chat-wrapper .talk-wrapper {display: flex;}
+.chat-wrapper .talk-wrapper .left {display: inline-block;}
+.chat-wrapper .talk-wrapper .right {display: none;}
+.chat-wrapper .talk-wrapper .icon {border-radius: 50%; overflow: hidden; width: 36px; height: 36px;}
+.chat-wrapper .talk-wrapper .talk-wrap {padding-left: .5em; margin-bottom: .5em; flex-grow: 1; max-width: 50%;}
+.chat-wrapper .talk-wrapper .writer {padding: .25em .25em .5em .5em; font-size: .875em;}
+.chat-wrapper .talk-wrapper .date {padding: .325em .325em .325em .625em; font-size: .75em; color: #555; align-self: flex-end; flex-shrink: 0;}
+.chat-wrapper .talk-wrapper .content-wrap {display: flex;}
+.chat-wrapper .talk-wrapper .content-wrap i {color: #fff;}
+.chat-wrapper .talk-wrapper .content-wrap .content {background-color: #fff; padding: .5em; border-radius: 4px; line-height: 1.25;}
+.chat-wrapper .talk-wrapper .content-wrap .content a {color: blue; text-decoration: underline;}
+
+.chat-wrapper .talk-wrapper.me {justify-content: flex-end;}
+.chat-wrapper .talk-wrapper.me .left {display: none;}
+.chat-wrapper .talk-wrapper.me .right {display: inline-block;}
+.chat-wrapper .talk-wrapper.me .writer {text-align: right; padding: .25em .5em .5em .25em;}
+.chat-wrapper .talk-wrapper.me .content-wrap {order: 2; justify-content: flex-end;}
+.chat-wrapper .talk-wrapper.me .date {order: 1;}
+.chat-wrapper .talk-wrapper.me .content {order: 2;}
+.chat-wrapper .talk-wrapper.me i {order: 3;}
+.chat-wrapper .talk-wrapper.me .icon {display: none;}
+
+.chat-wrapper .gap-wrapper {padding: .25em 0;}
+
+
+/********************** room-wrapper *********************/
+.room-wrapper {display: none; flex-grow: 1; width: 100%; padding: 1em; align-items: stretch; flex-wrap: wrap; align-content: flex-start; overflow-y: auto;}
+.room-wrapper ::placeholder {color: #ddd;}
+.room-wrapper .room-wrap {width: 23%; margin: 1%; padding: 1em; border: 3px solid pink; background-color: #fdebee; border-radius: 10px;}
+.room-wrapper .room-wrap h3.title {text-align: center; margin: .325em 0 .75em 0; font-size: 1.325em; font-weight: bold; color:#5c2452;}
+.room-wrapper .room-wrap h3.name {font-size: 1.325em; font-weight: bold; margin-bottom: .5em; text-decoration: underline;}
+.room-wrapper .room-wrap h4.writer {font-size: 1.125em; margin-bottom: .5em;}
+.room-wrapper .room-wrap .date {color: #777; margin-bottom: .5em;}
+.room-wrapper .room-wrap .btn {padding: 3px 8px 1px 8px;}
+.room-wrapper .room-wrap .enter-wrap {justify-content: center;}
+
+.room-wrapper .room-wrap.create {background-color: #ddd; border: 3px solid #a0a0a0;}
+.room-wrapper .room-wrap.secure {background-color: #c5afe9; border: 3px solid #a55fa9;}
+
+.room-wrapper .room-choice {text-align: center; margin: .5em 0;}
+.room-wrapper .create input[type="text"] {padding: .125em .5em; font-size: .875em}
+.room-wrapper .create input[type="password"] {padding: .125em .5em; font-size: .875em}
+.room-wrapper .create > div {margin-bottom: .25em;}
+.room-wrapper .create > div.writer {display: flex; justify-content: space-between;}
+.room-wrapper .create > div > .text-danger {margin: .325em 0 .625em 0; font-size: .875em;}
+.room-wrapper .create > div.btn-wrap {text-align: center;}
+.room-wrapper .form-inline input {width: 49%;}
+
+
+/********************** login-wrapper *********************/
+.login-wrapper {display: flex; flex-direction: column; justify-content: center; align-items: center; flex-grow: 1; width: 100%;}
+.login-wrapper > .bt-login {align-items: center;}
+.login-wrapper > .bt-login > i {margin-right: .5em;}
+.login-wrapper > div {padding: 1em 0 3em 0;}
+
+
+/********************** 반응형 설정 *********************/
+@media (max-width: 1399px) {
+
+}
+
+@media (max-width: 1199px) {
+	.wrapper {margin: 0 1em;}
+	.chat-wrapper .talk-wrapper .talk-wrap {max-width: 50%;}
+	.room-wrapper .room-wrap {width: 31.3333%;}
+}
+
+@media (max-width: 991px) {
+	.chat-wrapper .talk-wrapper .talk-wrap {max-width: 70%;}
+}
+
+@media (max-width: 767px) {
+	.header-wrapper .logo::after {content: 'FB TALK'; letter-spacing: -2px;}
+	.header-wrapper .email {display: none;}
+	.header-wrapper .navi-wrap .bt-login::after {content: '';}
+	.header-wrapper .navi-wrap .bt-logout::after {content: '';}
+	.chat-wrapper .talk-wrapper .talk-wrap {max-width: 90%;}
+	.room-wrapper .room-wrap {width: 48%;}
+}
+
+@media (max-width: 575px) {
+	.title-wrapper {margin: 2em 0 1.5em 0;}
+	.title-wrapper h2.title {font-size: 1.25em;}
+	.header-wrapper .navi-wrap .navi {padding: 1em .5em;}
+	.header-wrapper .navi-wrap .navi.bt-login {padding: 1em;}
+	.header-wrapper .navi-wrap .navi.bt-logout {padding: 1em;}
+	.header-wrapper br {display: block;}
+	.chat-wrapper .create-wrapper form > .btn {margin: auto;}
+	.chat-wrapper .talk-wrapper .talk-wrap {max-width: 100%;}
+	.room-wrapper .room-wrap {width: 98%;}
+}

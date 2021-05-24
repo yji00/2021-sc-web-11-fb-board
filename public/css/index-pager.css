@@ -10,12 +10,13 @@ html, body {font-family: 'NanumBarunGothic', sans-serif;}
 
 /********************** pagination custom *********************/
 .pagination {justify-content: center;}
-.page-item .page-link {padding: .5em .75em .35em .75em;}
+.page-item {cursor: pointer;}
+.page-item .page-link {padding: .5em .75em .35em .75em; color: inherit;}
 .page-item.active .page-link {background-color: #343a40; border-color: #454d55;}
 
 
 /********************** header-wrapper *********************/
-.header-wrapper {font-family: 'Noto Serif', serif; display: flex; align-items: center; background-color: #333; color: #fff;}
+.header-wrapper {font-family: 'Noto Serif', serif; display: flex; align-items: center; background-color: #5a5a5a; color: #fff;}
 .header-wrapper .logo {font-size: 1.75em; padding-left: .5em; display: flex; align-items: center;}
 .header-wrapper .logo::after {content: 'FIREBASE BOARD'; display: inline-block;}
 .header-wrapper .logo i {font-size: .875em; margin-right: .5em;}
