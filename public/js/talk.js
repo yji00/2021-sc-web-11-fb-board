@@ -11,6 +11,10 @@ var $listWrapper = $('.list-wrapper');
 var yoil = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'];
 var prevDate = '';
 
+
+var $check =$('.room-wrap .check')
+
+
 /*************** Auth *****************/
 auth.onAuthStateChanged(onChangeAuth);
 $('.bt-login').click(onLoginGoogle);
@@ -63,10 +67,23 @@ function onSecretChanged(el) {
 	// console.log(el.checked);
 	// console.log($(el).is(':checked'));
 	if(el.checked) {
-		$(el.form.roompw).show();
+		$(el.form.roompw).removeAttr('readonly');
+		var $roomPw = $(el.form.roompw);
+		var key = el.form.key.value;
+		roomRef.child(key).get()
+		.then(function(r) {
+			if (r) {
+				$roomPw.val(r.val().roompw);
+			} else {
+				console.log("No data available");
+			}
+		}).catch((error) => {
+			console.error(error);
+		});
 	}
 	else {
-		$(el.form.roompw).hide();
+		$(el.form.roompw).attr('readonly','readonly');
+		$(el.form.roompw).val('');
 	}
 }
 
@@ -220,22 +237,24 @@ function onRoomRemoved(v) {
 }
 
 function genRoom(k, v, isChange) {
+	var $check =$('.room-wrap .check');
+	console.log($check);
 	var html = '';
 	html += '<div class="room-wrap '+(v.roompw !== '' ? 'secure' : '')+'" id="'+k+'">';
 	if(user.uid === v.uid) {
 			html += '<form class="create" onsubmit="return onRoomSubmit(this);">';
 			html += '<input type="hidden" name="key" value="'+k+'">';
 			html += '<div class="room-choice text-center">';
+			html += '</div>';
+			html += '<div class="name form-inline">';
+			html += '<input type="text" class="form-control writer" name="writer" placeholder="방장이름" value="'+v.writer+'">';
+			html += '<input type="text" class="form-control name" name="name" placeholder="방제목" value="'+v.name+'">';
+			html += '</div>';
 			html += '<label>';
-			html += '<input type="checkbox" name="secret" onchange="onSecretChanged(this);" value="secret" '+(v.secret ? 'checked': '')+'> 비밀방';
+			html += '<input type="checkbox" class="check" name="secret" onchange="onSecretChanged(this);" value="secret" '+(v.secret ? 'checked': '')+'> 비밀방';
 			html += '</label>';
-			html += '</div>';
-			html += '<div class="name">';
-			html += '<input type="text" class="form-control" name="name" placeholder="방제목" value="'+v.name+'">';
-			html += '</div>';
-			html += '<div class="writer form-inline">';
-			html += '<input type="text" class="form-control" name="writer" placeholder="방장이름" value="'+v.writer+'">';
-			html += '<input type="password" class="form-control" name="roompw" placeholder="비밀번호" value="'+v.roompw+'" style="display: '+(v.secret ? 'inline-block' : 'none')+';">';
+			html += '<div class="writer">';
+			html += '<input type="password" class="form-control" name="roompw" placeholder="비밀번호" value="'+($check ?  v.roompw : '')+'"'+(v.secret ? '' : 'readonly="readonly"')+';>';
 			html += '</div>';
 			html += '<hr>';
 			html += '<div class="btn-wrap">';

@@ -60,17 +60,17 @@
 					<label class="mr-3" for="openRadio">공개방</label>
 					<input type="radio" name="secret" id="secretRadio" onchange="onSecretChanged(this);" value="secret">
 					<label for="secretRadio">비공개방</label> -->
-					<label>
-						<input type="checkbox" name="secret" onchange="onSecretChanged(this);" value="secret">
-						비밀방
-					</label>
 				</div>
-				<div class="name">
-					<input type="text" class="form-control" name="name" placeholder="방제목">
+				<div class="name witer form-inline">
+					<input type="text" class="form-control writer" name="writer" placeholder="방장이름">
+					<input type="text" class="form-control name" name="name" placeholder="방제목">
 				</div>
-				<div class="writer form-inline">
-					<input type="text" class="form-control" name="writer" placeholder="방장이름">
-					<input type="password" class="form-control" name="roompw" placeholder="비밀번호" style="display: none;">
+				<label>
+					<input type="checkbox" name="secret" onchange="onSecretChanged(this);" value="secret" readonly="readonly">
+					비밀방
+				</label>
+				<div class="writer ">
+					<input type="password" class="form-control" name="roompw" placeholder="비밀번호" readonly="readonly">
 				</div>
 				<hr>
 				<div class="btn-wrap">
