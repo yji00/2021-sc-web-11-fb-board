@@ -238,7 +238,6 @@ function onRoomRemoved(v) {
 
 function genRoom(k, v, isChange) {
 	var $check =$('.room-wrap .check');
-	console.log($check);
 	var html = '';
 	html += '<div class="room-wrap '+(v.roompw !== '' ? 'secure' : '')+'" id="'+k+'">';
 	if(user.uid === v.uid) {

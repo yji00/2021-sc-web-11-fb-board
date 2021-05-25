@@ -16,14 +16,14 @@ html, body {font-family: 'NanumBarunGothic', sans-serif;}
 
 
 /********************** header-wrapper *********************/
-.header-wrapper {font-family: 'Noto Serif', serif; display: flex; align-items: center; background-color: #a0368e; color: #fff; width: 100%;}
+.header-wrapper {font-family: 'Noto Serif', serif; display: flex; align-items: center; background-color: #a0a0a0; color: #fff; width: 100%;}
 .header-wrapper br {display: none;}
 .header-wrapper .logo {font-size: 1.75em; padding-left: .5em; display: flex; align-items: center;}
 .header-wrapper .logo::after {content: 'FIREBASE TALK'; display: inline-block;}
 .header-wrapper .logo i {font-size: .875em; margin-right: .5em;}
 .header-wrapper .navi-wrap {margin-left: auto; display: flex; font-family: 'NanumBarunGothic', sans-serif;}
 .header-wrapper .navi-wrap .navi {cursor: pointer; flex-shrink: 1;}
-.header-wrapper .navi-wrap .navi:hover {background-color: crimson;}
+.header-wrapper .navi-wrap .navi:hover {color: #06c;}
 .header-wrapper .navi-wrap .navi a {display: inline-block; padding: 1.5em;}
 .header-wrapper .navi-wrap .navi.bt-login {align-items: center; padding: 1.5em;}
 .header-wrapper .navi-wrap .navi.bt-login i {margin-right: .25em;}
@@ -89,18 +89,23 @@ html, body {font-family: 'NanumBarunGothic', sans-serif;}
 
 
 /********************** room-wrapper *********************/
+/* background-color: #f3f3f3 
+solid #a0a0a0
+hover solid #06c */
 .room-wrapper {display: none; flex-grow: 1; width: 100%; padding: 1em; align-items: stretch; flex-wrap: wrap; align-content: flex-start; overflow-y: auto;}
 .room-wrapper ::placeholder {color: #ddd;}
-.room-wrapper .room-wrap {width: 23%; margin: 1%; padding: 1em; border: 3px solid pink; background-color: #fdebee; border-radius: 10px;}
+.room-wrapper .room-wrap {width: 23%; margin: 1%; padding: 1em; border: 3px solid #a0a0a0; background-color: #f3f3f3; border-radius: 10px;}
 .room-wrapper .room-wrap h3.title {text-align: center; margin: .325em 0 .75em 0; font-size: 1.325em; font-weight: bold; color:#5c2452;}
 .room-wrapper .room-wrap h3.name {font-size: 1.325em; font-weight: bold; margin-bottom: .5em; text-decoration: underline;}
 .room-wrapper .room-wrap h4.writer {font-size: 1.125em; margin-bottom: .5em;}
 .room-wrapper .room-wrap .date {color: #777; margin-bottom: .5em;}
 .room-wrapper .room-wrap .btn {padding: 3px 8px 1px 8px;}
 .room-wrapper .room-wrap .enter-wrap {justify-content: center;}
+.room-wrapper .room-wrap:hover {border: 3px solid #06c;}
+.room-wrapper .room-wrap.secure:hover {border: 3px solid #06c;}
 
-.room-wrapper .room-wrap.create {background-color: #ddd; border: 3px solid #a0a0a0;}
-.room-wrapper .room-wrap.secure {background-color: #c5afe9; border: 3px solid #a55fa9;}
+.room-wrapper .room-wrap.create {background-color: #ccc; border: 3px solid #a0a0a0;}
+.room-wrapper .room-wrap.secure {background-color: #f3f3f3; border: 3px solid #a0a0a0;}
 
 .room-wrapper .room-choice {text-align: center; margin: .5em 0;}
 .room-wrapper .create input[type="text"] {padding: .125em .5em; font-size: .875em;}
