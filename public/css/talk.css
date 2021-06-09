@@ -102,10 +102,10 @@ hover solid #06c */
 .room-wrapper .room-wrap .btn {padding: 3px 8px 1px 8px;}
 .room-wrapper .room-wrap .enter-wrap {justify-content: center;}
 .room-wrapper .room-wrap:hover {border: 3px solid #06c;}
-.room-wrapper .room-wrap.secure:hover {border: 3px solid #06c;}
 
 .room-wrapper .room-wrap.create {background-color: #ccc; border: 3px solid #a0a0a0;}
-.room-wrapper .room-wrap.secure {background-color: #f3f3f3; border: 3px solid #a0a0a0;}
+.room-wrapper .room-wrap.secure {opacity: .5;}
+.room-wrapper .room-wrap.secure:hover {border: 3px solid #06c; opacity: 1;}
 
 .room-wrapper .room-choice {text-align: center; margin: .5em 0;}
 .room-wrapper .create input[type="text"] {padding: .125em .5em; font-size: .875em;}
