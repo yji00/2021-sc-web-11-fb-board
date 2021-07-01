@@ -22,8 +22,8 @@ function genHTML(k, v, method) {
 	html += '</td>';
 	html += '<td class="content text-left"><span>'+v.content+'</span>';
 	html += '<div class="btn-group mask">';
-	html += '<button class="bt-chg btn btn-sm btn-info"><i class="fa fa-edit"></i></button>';
-	html += '<button class="bt-rev btn btn-sm btn-info"><i class="fa fa-trash-alt"></i></button>';
+	html += '<button class="bt-chg btn btn-sm btn-outline-primary"><i class="fa fa-edit"></i></button>';
+	html += '<button class="bt-rev btn btn-sm btn-outline-primary"><i class="fa fa-trash-alt"></i></button>';
 	html += '</div>';
 	html += '</td>';
 	html += '<td class="writer">'+v.writer+'</td>';

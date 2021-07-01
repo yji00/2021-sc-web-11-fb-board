@@ -42,7 +42,8 @@ html, body {font-family: 'NanumBarunGothic', sans-serif;}
 .create-wrapper form > input[name='content'] {flex-grow: 1; margin: 0 .5em;}
 .create-wrapper form .btn {padding: .375rem 1.5rem;}
 .create-wrapper form input {transition: all .5s;}
-.create-wrapper form.active input {border-color: #28a745; background-color: #fff7dc;}
+.create-wrapper form.active input {border-color: #06c; background-color: #fff;}
+
 
 
 /********************** list-wrapper *********************/
@@ -56,6 +57,8 @@ html, body {font-family: 'NanumBarunGothic', sans-serif;}
 .list-wrapper table > tbody > tr > td {opacity: 0; transition: all 3s;}
 .list-wrapper table > tbody > tr.active > td {opacity: 1;}
 
+
+tbody td.content .btn-group > .btn {background-color: none; border: 1px solid #999;}
 
 /********************** 반응형 설정 *********************/
 @media (max-width: 1399px) {
